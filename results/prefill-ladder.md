@@ -13,6 +13,7 @@ so the median there is the warmup, not the speed).
 | 8,572 | 7.0 s | 1,226 tok/s | 107.9 tok/s |
 | 33,628 | 13.0 s | 2,593 tok/s | 100.8 tok/s |
 | 104,114 | 34.5 s | 3,015 tok/s | 96.5 tok/s |
+| 249,304 | 90.6 s | 2,751 tok/s | 90.2 tok/s |
 
 Reading it: prefill scales almost linearly with prompt size here
 (~3× the tokens for ~2.4× the time from 8k to 104k) — the prompt path

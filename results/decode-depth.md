@@ -13,6 +13,7 @@ rate from `/metrics` (`decode_tok_s`, excludes time-to-first-token).
 | 33.6k | 100.8 | — |
 | ~100k | 96.5 | 102.8 |
 | ~195k | 91.8 | 104.3 (98.8 on rerun) |
+| ~250k | 90.2 | — |
 
 Reading it: decode falls gently with depth (~108 → ~92 tok/s from 8k
 to 200k on spec 4) as KV depth grows; draft acceptance holds ~87–90%
