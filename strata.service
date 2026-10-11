@@ -1,0 +1,28 @@
+[Unit]
+Description=Strata LLM server (Qwen3.8-Flash-Next IQ3_XXS, 3x Tesla V100)
+Documentation=file://%h/strata-work/Strata/docs/DETAILS.md
+# Replace %h with your home directory if your systemd does not expand it,
+# and make sure tailscaled (or your network route) is up first if you bind
+# a non-local address in strata-iq3_xxs.json.
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=%u
+WorkingDirectory=%h/strata-work/Strata
+# run-iq3_xxs.sh (no --open) execs serve/server.py in the foreground, so
+# systemd tracks the real process and can stop it cleanly.
+ExecStart=%h/strata-work/Strata/run-iq3_xxs.sh
+Restart=always
+RestartSec=10
+# The engine holds ~40 GiB of expert weights in RAM; give it time to unmap.
+TimeoutStopSec=180
+# Kill the engine children (and strata-vision) too, not just server.py.
+KillMode=mixed
+KillSignal=SIGTERM
+StandardOutput=append:%h/strata-work/strata-systemd.log
+StandardError=append:%h/strata-work/strata-systemd.log
+
+[Install]
+WantedBy=multi-user.target
